@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 var assignments = [];
 
-app.post("/consegna", function(req, res){
+app.post("/assignment", function(req, res){
 //Math.round((Math.random()*domande.length)
 	var taskID = req.body.taskID || req.query.taskID;
 	var assignmentID = req.body.assignmentID || req.query.assignmentID;
@@ -54,7 +54,7 @@ app.post("/consegna", function(req, res){
     
 }); 
 
-app.put("/modifica", function(req, res){
+app.put("/assignment", function(req, res){
 //Math.round((Math.random()*domande.length)
 	var mtaskID = req.body.taskID || req.query.taskID;
 	var massignmentID = req.body.assignmentID || req.query.assignmentID;
@@ -92,7 +92,7 @@ app.put("/modifica", function(req, res){
 }); 
 
 
-app.get("/guarda", function(req, res){
+app.get("/assignment", function(req, res){
 //Math.round((Math.random()*domande.length)
 	var gtaskID = req.body.taskID || req.query.taskID;
 	var gworkerID = req.body.workerID || req.query.workerID;
@@ -124,7 +124,7 @@ app.get("/guarda", function(req, res){
     
 }); 
 
-app.delete("/cancella", function(req, res){
+app.delete("/assignment", function(req, res){
 //Math.round((Math.random()*domande.length)
 	var ctaskID = req.body.taskID || req.query.taskID;
 	var cworkerID = req.body.workerID || req.query.workerID;
@@ -159,125 +159,7 @@ app.delete("/cancella", function(req, res){
 	}
     
 }); 
-/*app.post("/domanda", function(req, res){
 
-    var dom = req.body.dom || req.query.dom;
-    var ris = req.body.ris || req.query.ris;
-
-    var error = "";
-    var domanda={
-    	question : "",
-    	answer : ""
-    };
-
-    if(typeof(dom) === "undefined"){
-    	error = "Inserire una domanda valida";
-    }
-    else{
-	    if(typeof(ris) === "undefined"){
-	    	error = "Inserire una risposta valida";
-	    }	
-	    else{
-	    		domanda.question = dom;
-	    		domanda.answer = ris;
-	    		domande.push(domanda);
-	    	}
-	    
-    }
-
-    if(error != ""){
-    	res.setHeader('Content-Type', 'application/json');
-    	res.status(400).json({
-    		errore: error
-    	});
-    }
-    else{	    	
-		res.status(200).json({
-			status: "Ok! Domanda aggiunta",
-			pos: domande.length-1
-		});
-    }
-
-});
-
-app.post("/risposta", function(req, res){
-   
-    var id = req.body.id || req.query.id;
-    var ris = req.body.ris || req.query.ris;
-
-    var error = "";
-
-    var n
-
-    console.log(id);
-
-    if(tentativi>0){
-
-
-
-	    if(typeof(id) === "undefined"){
-			error="Id non valido 1";
-		}
-		else{
-			
-			if(id != parseInt(id) || id == "" || isNaN(id)){
-				
-				
-				error="Id non valido 2";
-			}
-			else{
-				
-				n = parseInt(id);
-				if((n < 0) || (n > domande.length)){
-					error="Id non valido 3";
-				}
-
-			}
-			
-
-		}
-
-	    if(error != ""){
-	    	res.setHeader('Content-Type', 'application/json');
-	    	res.status(400).json({
-	    		errore: error
-	    	});
-	    }
-	    else{	 
-	    	if(modulo.check(ris, domande[n].answer)==1){
-	    		res.setHeader('Content-Type', 'application/json');
-	    		res.status(200).json({
-					status: "Risposta giusta",
-					tentativi: tentativi
-				});
-	    	}
-	    	else
-	    	{
-	    		tentativi--;
-	    		res.setHeader('Content-Type', 'application/json');
-	    		res.status(200).json({
-					status: "Risposta sbagliata",
-					tentativi: tentativi
-				});
-
-
-	    	}
-
-	    }
-
-
-	}
-	else
-	{
-		res.setHeader('Content-Type', 'application/json');
-	    		res.status(200).json({
-					status: "Tentativi finiti",
-					
-				});
-
-	}
-
-});*/
 
 //listen in a specific port
 app.listen((process.env.PORT || 65000));
