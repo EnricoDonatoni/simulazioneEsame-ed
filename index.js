@@ -91,6 +91,74 @@ app.put("/modifica", function(req, res){
     
 }); 
 
+
+app.get("/guarda", function(req, res){
+//Math.round((Math.random()*domande.length)
+	var gtaskID = req.body.taskID || req.query.taskID;
+	var gworkerID = req.body.workerID || req.query.workerID;
+
+	var i=0;
+
+	var guardato = 0;
+
+	for(i=0; i<assignments.length; i++){
+		if(gtaskID == assignments[i].taskID){
+			if(gworkerID == assignments[i].workerID){
+				res.setHeader('Content-Type', 'application/json');
+				res.status(200).json({
+					status: "Ricerca terminata con successo!",
+					assignmentMostrato: assignments[i]
+				});
+				guardato = 1;
+			}
+
+		}
+	}
+
+	if(guardato == 0){
+		res.status(400).json({
+					errore: "Non trovato assignment da mostrare"
+				});
+
+	}
+    
+}); 
+
+app.delete("/cancella", function(req, res){
+//Math.round((Math.random()*domande.length)
+	var ctaskID = req.body.taskID || req.query.taskID;
+	var cworkerID = req.body.workerID || req.query.workerID;
+
+	var i=0;
+
+	var cancellato = 0;
+
+	for(i=0; i<assignments.length; i++){
+		if(ctaskID == assignments[i].taskID){
+			if(cworkerID == assignments[i].workerID){
+
+				assignments.splice(i,1);
+				console.log(assignments);
+				
+				res.setHeader('Content-Type', 'application/json');
+				res.status(200).json({
+					status: "Cancellazione terminata con successo!",
+					assignmentMostrato: assignments
+				});
+				cancellato = 1;
+			}
+
+		}
+	}
+
+	if(cancellato == 0){
+		res.status(400).json({
+					errore: "Non trovato assignment da cancellare"
+				});
+
+	}
+    
+}); 
 /*app.post("/domanda", function(req, res){
 
     var dom = req.body.dom || req.query.dom;
